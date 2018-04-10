@@ -5,13 +5,11 @@
   "author": "Jose Valdvogel",
   "license": "MIT",
   "scripts": {
-    "serve": "live-server public/",
     "build:dev": "webpack",
     "build:prd": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
     "start": "node server/server.js",
     "heroku-postbuild": "yarn run build:prd"
-
   },
   "dependencies": {
     "babel-cli": "6.24.1",
@@ -24,7 +22,6 @@
     "css-loader": "0.28.4",
     "express": "^4.16.3",
     "extract-text-webpack-plugin": "^3.0.2",
-    "live-server": "^1.2.0",
     "moment": "^2.22.0",
     "node-sass": "^4.7.2",
     "normalize.css": "7.0.0",
@@ -41,7 +38,11 @@
     "style-loader": "0.18.2",
     "uuid": "^3.2.1",
     "validator": "8.0.0",
-    "webpack": "3.1.0",
+    "webpack": "3.1.0"
+  },
+  "devDependencies": {
+    "chalk": "^2.3.2",
+    "live-server": "^1.2.0",
     "webpack-dev-server": "2.5.1"
   }
 }
