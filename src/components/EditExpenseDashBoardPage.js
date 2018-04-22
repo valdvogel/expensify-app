@@ -1,19 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editExpense, startRemoveExpense } from '../actions/expenses';
+import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 import ReactDOM from 'react-dom';
 import ExpenseForm from './ExpenseForm';
 
 const EditExpenseDashBoardPage = (props) => {
-    console.log(props);
-
     return (
         <div>
             This is my edit component with id {props.match.params.id}
             <ExpenseForm
                 expense={props.expense}
                 onSubmit={(expense) => {
-                    props.dispatch(editExpense(
+                    props.dispatch(startEditExpense(
                         props.expense.id,
                         expense
                     ));
