@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editExpense, removeExpenseById } from '../actions/expenses';
+import { editExpense, startRemoveExpense } from '../actions/expenses';
 import ReactDOM from 'react-dom';
 import ExpenseForm from './ExpenseForm';
 
@@ -22,7 +22,7 @@ const EditExpenseDashBoardPage = (props) => {
                 }}
             />
             <button onClick={() => {
-                props.dispatch(removeExpenseById({ id: props.expense.id }));
+                props.dispatch(startRemoveExpense({ id: props.expense.id }));
                 props.history.push('/');
             }}>Remove</button>
         </div>
