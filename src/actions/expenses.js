@@ -28,14 +28,6 @@ export const startAddExpense = (expenseData = {}) => {
                     ...expense
                 }));
             });
-
-        //debugger;
-
-        // const ref = database.ref('expenses').push(expense).then(()=>
-        //     {console.log('foi')}
-        // ).catch((e)=> console.log(e));
-        //console.log(ref);
-
     };
 };
 
@@ -54,4 +46,37 @@ export const editExpense = (id, updates) => ({
     updates
 
 });
+
+//SET EXPENSES
+
+export const setExpenses = (expenses) => ({
+    type: 'SET_EXPENSES',
+    expenses
+
+});
+
+export const startSetExpense = () => {
+
+    return(dispatch) =>{
+        return database.ref('expenses')
+        .once('value')
+        .then((snapshot) => {
+
+            const expenses = [];
+
+            snapshot.forEach((child) => {
+                expenses.push({
+                    id: child.key,
+                    ...child.val()
+                });
+            });
+
+            console.log(expenses);
+
+            dispatch(setExpenses(expenses));
+        }).catch((e) => {
+            console.log(e);
+        });
+    };
+};
 
