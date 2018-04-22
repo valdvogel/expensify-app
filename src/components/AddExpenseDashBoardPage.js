@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import {addExpense} from '../actions/expenses';
+import {startAddExpense} from '../actions/expenses';
 
 const AddExpenseDashBoardPage = (props) => (
     <div>
         <h1>Add Expense</h1>
         <ExpenseForm
             onSubmit={(expense)=>{
-                props.dispatch(addExpense({
+                props.dispatch(startAddExpense({
                     description : expense.description,
                     notes: expense.notes,
                     amount: expense.amount,

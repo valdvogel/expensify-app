@@ -6,8 +6,10 @@
   "license": "MIT",
   "scripts": {
     "build:dev": "webpack",
+    "build:test": "webpack  -p --env test",
     "build:prd": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
+    "test": "webpack NODE_ENV=test ",
     "start": "node server/server.js",
     "heroku-postbuild": "yarn run build:prd"
   },
@@ -22,6 +24,7 @@
     "css-loader": "0.28.4",
     "express": "^4.16.3",
     "extract-text-webpack-plugin": "^3.0.2",
+    "firebase": "^4.12.1",
     "moment": "^2.22.0",
     "node-sass": "^4.7.2",
     "normalize.css": "7.0.0",
@@ -35,6 +38,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "4.2.2",
     "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.7",
     "style-loader": "0.18.2",
     "uuid": "^3.2.1",
@@ -43,6 +47,8 @@
   },
   "devDependencies": {
     "chalk": "^2.3.2",
+    "cross-env": "^5.1.4",
+    "dotenv": "^5.0.1",
     "live-server": "^1.2.0",
     "webpack-dev-server": "2.5.1"
   }
