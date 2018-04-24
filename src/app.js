@@ -10,8 +10,6 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import { firebase } from './firebase/firebase';
 
-
-
 const store = configureStore();
 
 const jsx = (
@@ -34,11 +32,12 @@ ReactDOM.render(<p>Loading Page...</p>, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        store.dispatch(login(user.id));
+        store.dispatch(login(user.uid));
         store.dispatch(startSetExpense()).then(() => {
             renderApp();
             if(history.location.pathname ==='/'){
                 history.push('/dashboard');
+                console.log('3');
             }
         });
 

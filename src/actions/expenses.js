@@ -8,7 +8,8 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         const {
             description = ''
             , notes = ''
@@ -17,10 +18,8 @@ export const startAddExpense = (expenseData = {}) => {
 
         } = expenseData;
         const expense = { description, notes, amount, createdAt };
-
-        //console.log(expenseData);
-        //console.log(expense);
-        database.ref('expenses')
+        
+        database.ref(`users/${uid}/expenses`)
             .push(expense)
             .then((ref) => {
                 dispatch(addExpense({
@@ -39,9 +38,9 @@ export const removeExpenseById = ({ id } = {}
 });
 
 export const startRemoveExpense = ({ id } = {}) => {
-    return (dispatch) => {
-
-        return database.ref('expenses/' + id.toString())
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses/${id}`)
             .remove()
             .then(() => {
                 dispatch(removeExpenseById({ id }));
@@ -60,10 +59,10 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = (id, updates) => {
-    return (dispatch) => {
-
-        console.log(updates);
-        return database.ref(`expenses/${id}`).update(updates)
+    return (dispatch,getState) => {
+        const uid = getState().auth.uid;
+        
+        return database.ref(`users/${uid}/expenses/${id}`).update(updates)
             .then(() => {
                 dispatch(editExpense(id, updates));
             });
@@ -81,8 +80,10 @@ export const setExpenses = (expenses) => ({
 
 export const startSetExpense = () => {
 
-    return (dispatch) => {
-        return database.ref('expenses')
+    return (dispatch,getState) => {
+        const uid = getState().auth.uid;
+
+        return database.ref(`users/${uid}/expenses`)
             .once('value')
             .then((snapshot) => {
 
@@ -94,9 +95,6 @@ export const startSetExpense = () => {
                         ...child.val()
                     });
                 });
-
-                console.log(expenses);
-
                 dispatch(setExpenses(expenses));
             }).catch((e) => {
                 console.log(e);
